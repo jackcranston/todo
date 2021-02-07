@@ -1,14 +1,14 @@
-@import "src/styles/global.scss";
+@import 'src/styles/global.scss';
 
 /* Card */
 
 .Card {
   padding: $space-sm;
+  margin-bottom: $space-md;
   background: $secondary;
 
   &__title {
-  }
-
-  &__description {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
   }
 }

@@ -1,19 +1,36 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import Header from '../components/header';
-import Footer from '../components/footer';
 import CardGrid from '../components/cardGrid';
 
 import './index.scss';
 
-export const Layout = () => {
+export const Layout = (props) => {
+  const { cards } = props;
+
   return (
-    <Fragment>
-      <Header/>
-      <CardGrid/>
-      <Footer/>
-    </Fragment>
+    <>
+      <Header />
+      <CardGrid cards={cards} />
+    </>
   );
+};
+
+Layout.defaultProps = {
+  cards: PropTypes.arrayOf({
+    id: '',
+    title: '',
+    description: '',
+  }),
+};
+
+Layout.propTypes = {
+  cards: PropTypes.arrayOf({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+  }),
 };
 
 export default Layout;
