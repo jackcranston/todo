@@ -7,9 +7,9 @@ import Card from '../card';
 import './index.scss';
 
 const CardGrid = ({ todos }) => (
-  <div className="CardGrid" data-testid="card-grid">
+  <div className="cardGrid" data-testid="card-grid">
     {todos.map((todo) => (
-      <Card key={todo.id} title={todo.title} />
+      <Card key={todo.id} title={todo.title} id={todo.id} />
     ))}
   </div>
 );

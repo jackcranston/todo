@@ -22,15 +22,15 @@ const Form = ({ id, addTodo }) => {
           id={`${id}-input`}
           type="text"
           value={inputValue}
-          onChange={(event) => handleInputChange(event)}
+          onChange={handleInputChange}
           data-testid="form-input"
         />
       </label>
       <button
         className="form__submit"
         id={`${id}-submit`}
-        type="submit"
-        onClick={() => handleSubmit()}
+        type="button"
+        onClick={handleSubmit}
         data-testid="form-submit"
       >
         Add Task
@@ -41,7 +41,7 @@ const Form = ({ id, addTodo }) => {
 
 Form.defaultProps = {
   id: 'form',
-  addTodo: () => {},
+  addTodo: () => { },
 };
 
 Form.propTypes = {

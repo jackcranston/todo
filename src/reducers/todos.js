@@ -3,13 +3,17 @@ let id = 0;
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
+      id += 1;
+
       return [
         ...state,
         {
-          id: ++id, // eslint-disable-line
+          id,
           title: action.title,
         },
       ];
+    case 'REMOVE_TODO':
+      return state.filter((todo) => action.id !== todo.id)
     default:
       return state;
   }

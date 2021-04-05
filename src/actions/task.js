@@ -1,10 +1,15 @@
-import ADD_TODO from '../constants/actionTypes';
-
 const addTodo = (title) => ({
-  type: ADD_TODO,
+  type: 'ADD_TODO',
   payload: {
     title,
   },
 });
 
-export default addTodo;
+const removeTodo = (id) => ({
+  type: 'REMOVE_TODO',
+  payload: {
+    id,
+  },
+});
+
+export default { addTodo, removeTodo };
