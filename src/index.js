@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import store from './store';
-import addTodo from './actions/task';
+import { addTodo } from './actions/todos';
 
 import { Layout } from './layout';
 

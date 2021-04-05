@@ -1,15 +1,11 @@
 const addTodo = (title) => ({
   type: 'ADD_TODO',
-  payload: {
-    title,
-  },
+  title,
 });
 
 const removeTodo = (id) => ({
   type: 'REMOVE_TODO',
-  payload: {
-    id,
-  },
+  id
 });
 
-export default { addTodo, removeTodo };
+export { addTodo, removeTodo };
