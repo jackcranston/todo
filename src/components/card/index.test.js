@@ -29,14 +29,25 @@ describe('card::rendering', () => {
     expect(card).toBeTruthy();
   });
 
-  it('renders title correctly', () => {
-    const titleText = screen.getByTestId('card-title');
-    expect(titleText).toBeTruthy();
-    expect(titleText).toHaveTextContent('test title 1');
+  it('renders form elements correctly', () => {
+    const form = screen.getByTestId('card-form');
+    const editInput = screen.getByTestId('card-input');
+    const labelText = screen.getByTestId('card-label');
+    const submitButton = screen.getByTestId('card-submit');
+    expect(form).toBeTruthy();
+    expect(labelText).toBeTruthy();
+    expect(labelText).toHaveTextContent('test title 1');
+    expect(submitButton).toBeTruthy();
+    expect(editInput).toBeTruthy();
   });
 
-  it('renders remove button correctly', () => {
+  it('renders ui buttons correctly', () => {
+    const editButton = screen.getByTestId('card-edit');
     const removeButton = screen.getByTestId('card-remove');
+    const completeButton = screen.getByTestId('card-complete');
+    expect(editButton).toBeTruthy();
     expect(removeButton).toBeTruthy();
+    expect(completeButton).toBeTruthy();
+
   });
 });

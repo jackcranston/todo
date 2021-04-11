@@ -2,26 +2,31 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import './index.scss';
+
 const Form = ({ id, addTodo }) => {
   const [inputValue, setValue] = useState('');
-
-  const handleSubmit = () => {
-    addTodo(inputValue);
-  };
 
   const handleInputChange = (event) => {
     setValue(event.target.value);
   };
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addTodo(inputValue);
+    setValue('');
+  };
 
   return (
-    <form className="form" data-testid="form">
-      <label htmlFor="todo-form-input">
-        Task title
+    <form className="form" data-testid="form" onSubmit={handleSubmit}>
+      <label htmlFor={`${id}-input`}>
+        <span className="sr-only">Add new task</span>
         <input
           className="form__input"
           id={`${id}-input`}
           type="text"
           value={inputValue}
+          placeholder="Add new task"
           onChange={handleInputChange}
           data-testid="form-input"
         />
@@ -29,9 +34,9 @@ const Form = ({ id, addTodo }) => {
       <button
         className="form__submit"
         id={`${id}-submit`}
-        type="button"
-        onClick={handleSubmit}
+        type="submit"
         data-testid="form-submit"
+        hidden
       >
         Add Task
       </button>

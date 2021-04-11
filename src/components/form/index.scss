@@ -3,5 +3,10 @@
 /* form */
 
 .form {
-  
+  &__input {
+    padding: $space-sm;
+    border: 0;
+    background: 0;
+    font-size: $font-lg;
+  }
 }

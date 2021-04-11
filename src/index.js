@@ -10,6 +10,7 @@ import { Layout } from './layout';
 window.store = store;
 window.addTodo = addTodo;
 
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

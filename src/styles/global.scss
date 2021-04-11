@@ -2,6 +2,18 @@ $primary: #323031;
 $secondary: #3d3b3c;
 $white: #ffffff;
 
-$space-sm: 2rem;
-$space-md: 3rem;
-$space-lg: 5rem;
+$space-sm: 1.25rem;
+$space-md: 1.75rem;
+$space-lg: 2rem;
+$space-xl: 3rem;
+
+$font-lg: 2rem;
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
