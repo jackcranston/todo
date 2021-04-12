@@ -4,9 +4,16 @@
 
 .form {
   &__input {
+    width: 100%;
     padding: $space-sm;
-    border: 0;
+    border: 1px solid transparent;
     background: 0;
+    color: $yellow;
     font-size: $font-lg;
+
+    &:focus {
+      outline: none;
+      border: 1px dashed $white;
+    }
   }
 }

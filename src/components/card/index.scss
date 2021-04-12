@@ -3,12 +3,83 @@
 /* card */
 
 .card {
-  padding: $space-sm;
-  margin-bottom: $space-md;
+  display: flex;
+  margin-bottom: $space-sm;
   background: $secondary;
+  font-size: 1.25rem;
+
+  &__form {
+    display: flex;
+    width: 100%;
+  }
+
+  &__label {
+    width: 100%;
+  }
 
   &__title {
+    display: inline-block;
+    padding: $space-sm;
+    border: 1px solid transparent;
+
+    .card--complete & {
+      text-decoration: line-through;
+      color: $green;
+    }
+
+    .card--editing & {
+      display: none;
+    }
+  }
+
+  &__input {
+    display: none;
+    width: 100%;
+    padding: $space-sm;
+    border: 1px dashed $white;
+    background: none;
+    color: $yellow;
     font-size: 1.25rem;
-    margin-bottom: 1rem;
+
+    .card--editing & {
+      display: inline-block;
+    }
+  }
+
+  &__button {
+    background: none;
+    padding: $space-xs;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+
+    &--edit,
+    &--submit {
+      margin-left: auto;
+      color: $yellow;
+    }
+
+    &--edit {
+      .card--editing & {
+        display: none;
+      }
+    }
+
+    &--submit {
+      display: none;
+
+      .card--editing & {
+        display: inline-block;
+      }
+    }
+
+    &--remove {
+      color: $red;
+    }
+
+    &--complete {
+      color: $green;
+    }
   }
 }
