@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -13,6 +13,9 @@ const Card = (props) => {
     inputValue: title,
     editing: false
   });
+  const inputRef = useRef(null);
+
+  useEffect(() => inputRef.current.focus(), [state.editing]);
 
   const handleInputChange = (event) => {
     setState({
@@ -48,7 +51,16 @@ const Card = (props) => {
       <form className="card__form" data-testid="card-form" onSubmit={handleSubmit}>
         <label className="card__label" htmlFor={`card-input-${id}`} data-testid="card-label">
           <span className="card__title">{title}</span>
-          <input className="card__input" id={`card-input-${id}`} value={state.inputValue} onChange={handleInputChange} data-testid="card-input" />
+          <input
+            className="card__input"
+            id={`card-input-${id}`}
+            ref={inputRef}
+            type="text"
+            value={state.inputValue}
+            onChange={handleInputChange}
+            data-testid="card-input"
+            disabled={!state.editing}
+          />
         </label>
         <button className="card__button card__button--submit" data-testid="card-submit" type="submit">
           <span className="sr-only">Save</span>

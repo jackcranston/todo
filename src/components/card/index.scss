@@ -4,6 +4,7 @@
 
 .card {
   display: flex;
+  padding-right: $space-xs;
   margin-bottom: $space-sm;
   background: $secondary;
   font-size: 1.25rem;
@@ -18,28 +19,34 @@
   }
 
   &__title {
-    display: inline-block;
+    display: none;
+  }
+
+  &__input {
+    width: 100%;
     padding: $space-sm;
-    border: 1px solid transparent;
+    border: 1px solid $secondary;
+    background: none;
+    color: $yellow;
+    font-size: 1.25rem;
+
+    &:focus {
+      border: 1px dashed $white;
+      outline: none;
+    }
+
+    &:disabled {
+      color: $white;
+    }
 
     .card--complete & {
       text-decoration: line-through;
       color: $green;
-    }
 
-    .card--editing & {
-      display: none;
+      &:not(:disabled) {
+        color: $yellow;
+      }
     }
-  }
-
-  &__input {
-    display: none;
-    width: 100%;
-    padding: $space-sm;
-    border: 1px dashed $white;
-    background: none;
-    color: $yellow;
-    font-size: 1.25rem;
 
     .card--editing & {
       display: inline-block;
