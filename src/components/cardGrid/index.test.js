@@ -35,11 +35,13 @@ afterEach(cleanup);
 describe('cardgrid::rendering', () => {
   it('renders element correctly', () => {
     const cardGrid = screen.getByTestId('card-grid');
-    expect(cardGrid).toBeTruthy();
+
+    expect(cardGrid).toBeInTheDocument();
   });
 
   it('renders correct number of cards', async () => {
     const cardElements = await screen.findAllByTestId('card');
+    
     expect(cardElements).toHaveLength(3);
   });
 });

@@ -7,8 +7,7 @@ import { faCheck, faTimes, faPen, faSave } from '@fortawesome/free-solid-svg-ico
 
 import './index.scss';
 
-const Card = (props) => {
-  const { id, title, completed, updateTodo, removeTodo, completeTodo } = props;
+const Card = ({ id, title, completed, updateTodo, removeTodo, completeTodo }) => {
   const [state, setState] = useState({
     inputValue: title,
     editing: false
@@ -50,7 +49,7 @@ const Card = (props) => {
     <div className={classes.join(' ')} id={`card-${id}`} data-testid="card">
       <form className="card__form" data-testid="card-form" onSubmit={handleSubmit}>
         <label className="card__label" htmlFor={`card-input-${id}`} data-testid="card-label">
-          <span className="card__title">{title}</span>
+          <span className="card__title">Edit todo</span>
           <input
             className="card__input"
             id={`card-input-${id}`}

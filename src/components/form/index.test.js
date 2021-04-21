@@ -26,8 +26,8 @@ describe('form::rendering', () => {
     const formInput = screen.getByTestId('form-input');
     const formSubmit = screen.getByTestId('form-submit');
 
-    expect(form).toBeTruthy();
-    expect(formInput).toBeTruthy();
-    expect(formSubmit).toBeTruthy();
+    expect(form).toBeInTheDocument();
+    expect(formInput).toBeInTheDocument();
+    expect(formSubmit).toBeInTheDocument();
   });
 });
