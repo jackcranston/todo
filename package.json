@@ -23,7 +23,16 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "npm test -- --coverage --watchAll=false"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "html"
+    ]
   },
   "husky": {
     "hooks": {
