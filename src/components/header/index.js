@@ -1,18 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Header = (props) => {
-  const { text } = props;
+import Filters from '../filters';
+import Sort from '../sort';
 
-  return <h1 data-testid="header">{text}</h1>;
-};
+import './index.scss';
 
-Header.defaultProps = {
-  text: '',
-};
-
-Header.propTypes = {
-  text: PropTypes.string,
-};
+const Header = () => (
+  <header className="header" data-testid="header">
+    <Filters />
+    <Sort />
+  </header>
+);
 
 export default Header;

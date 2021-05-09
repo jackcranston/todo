@@ -10,7 +10,7 @@ const Form = ({ id, addTodo }) => {
   const handleInputChange = (event) => {
     setValue(event.target.value);
   };
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     addTodo(inputValue);
@@ -46,7 +46,7 @@ const Form = ({ id, addTodo }) => {
 
 Form.defaultProps = {
   id: 'form',
-  addTodo: () => { },
+  addTodo: () => {},
 };
 
 Form.propTypes = {

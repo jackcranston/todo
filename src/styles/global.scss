@@ -1,3 +1,5 @@
+/* global variables */
+
 $primary: #323031;
 $secondary: #3d3b3c;
 $white: #ffffff;
@@ -11,8 +13,12 @@ $space-md: 1.5rem;
 $space-lg: 2rem;
 $space-xl: 3rem;
 
+$font-sm: 0.8rem;
+$font-default: 1rem;
 $font-md: 1.25rem;
 $font-lg: 1.5rem;
+
+/* global styles */
 
 .sr-only {
   position: absolute;
@@ -21,4 +27,10 @@ $font-lg: 1.5rem;
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
 }

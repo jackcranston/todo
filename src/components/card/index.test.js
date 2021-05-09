@@ -9,16 +9,19 @@ import Card from './index';
 
 const mockStore = configureStore([]);
 const store = mockStore({
-  todos: [{
-    id: 1,
-    title: 'test title 1',
-    completed: false,
-    updateTodo: jest.fn(),
-    removeTodo: jest.fn(),
-    completeTodo: jest.fn()
-  }],
+  todos: [
+    {
+      id: 1,
+      title: 'test title 1',
+      completed: false,
+      updateTodo: jest.fn(),
+      removeTodo: jest.fn(),
+      completeTodo: jest.fn(),
+    },
+  ],
 });
 const todo = store.getState().todos[0];
+const actions = store.getActions();
 
 beforeEach(() => {
   render(
@@ -33,7 +36,7 @@ afterEach(cleanup);
 describe('card::rendering', () => {
   it('renders element correctly', () => {
     const card = screen.getByTestId('card');
-    
+
     expect(card).toBeTruthy();
   });
 
@@ -99,13 +102,27 @@ describe('card::functionality', () => {
     expect(input.value).toBe(inputText);
   });
 
-/*
+  /*
   it('marks todo as complete when user clicks complete button', async () => {
+    const mockCompleteTodo = jest.fn();
     const completeButton = screen.getByTestId('card-complete');
+    render(<Card store={store} completeTodo={mockCompleteTodo} />);
 
     userEvent.click(completeButton);
-    expect(todo.completeTodo).toHaveBeenCalledTimes(1);
+    expect(mockCompleteTodo).toHaveBeenCalledTimes(1);
   });
+*/
+  /*
+  it('marks todo as complete when user clicks complete button', async () => {
+    const completeButton = screen.getByTestId('card-complete');
+    const expectedAction = ({ type: 'COMPLETE_TODO', id: 1 });
+
+    userEvent.click(completeButton);
+    expect(actions).toEqual(expectedAction);
+  });
+  */
+
+  /*
   it('removes todo when user clicks remove button', async () => {
     const removeButton = screen.getByTestId('card-remove');
 

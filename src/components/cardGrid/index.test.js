@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
@@ -41,7 +41,7 @@ describe('cardgrid::rendering', () => {
 
   it('renders correct number of cards', async () => {
     const cardElements = await screen.findAllByTestId('card');
-    
+
     expect(cardElements).toHaveLength(3);
   });
 });

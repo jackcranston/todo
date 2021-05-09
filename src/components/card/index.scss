@@ -4,18 +4,17 @@
 
 .card {
   display: flex;
-  padding-right: $space-xs;
   margin-bottom: $space-sm;
   background: $secondary;
   font-size: 1.25rem;
 
   &__form {
     display: flex;
-    width: 100%;
+    flex-grow: 1;
   }
 
   &__label {
-    width: 100%;
+    flex-grow: 1;
   }
 
   &__title {
@@ -55,11 +54,21 @@
 
   &__button {
     background: none;
-    padding: $space-xs;
-    border: none;
+    width: 40px;
+    border: 1px dashed $secondary;
     cursor: pointer;
     color: white;
     font-size: 1rem;
+
+    &:hover,
+    &:focus {
+      opacity: 0.75;
+    }
+
+    &:focus-visible {
+      border-color: $white;
+      outline: none;
+    }
 
     &--edit,
     &--submit {

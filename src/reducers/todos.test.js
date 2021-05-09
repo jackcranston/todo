@@ -3,47 +3,44 @@ import todos from './todos';
 describe('reducers', () => {
   it('should handle add todo', () => {
     expect(
-      todos(
-        [],
-        {
-          type: 'ADD_TODO',
-          title: 'test title 1'
-        }
-      )
+      todos([], {
+        type: 'ADD_TODO',
+        title: 'test title 1',
+      })
     ).toEqual([
       {
-        id: 1,
+        id: 0,
         title: 'test title 1',
-        completed: false
-      }
+        completed: false,
+      },
     ]);
 
     expect(
       todos(
         [
           {
-            id: 1,
+            id: 0,
             title: 'test title 1',
-            completed: true
-          }
+            completed: true,
+          },
         ],
         {
           type: 'ADD_TODO',
-          title: 'test title 2'
+          title: 'test title 2',
         }
       )
     ).toEqual([
       {
-        id: 1,
+        id: 0,
         title: 'test title 1',
-        completed: true
+        completed: true,
       },
       {
-        id: 2,
+        id: 1,
         title: 'test title 2',
-        completed: false
-      }
-    ])
+        completed: false,
+      },
+    ]);
   });
 
   it('should handle update todo', () => {
@@ -51,34 +48,34 @@ describe('reducers', () => {
       todos(
         [
           {
-            id: 1,
+            id: 0,
             title: 'test title 1',
-            completed: false
+            completed: false,
           },
           {
-            id: 2,
+            id: 1,
             title: 'test title 2',
-            completed: true
-          }
+            completed: true,
+          },
         ],
         {
           type: 'UPDATE_TODO',
-          id: 1,
-          title: 'new test title 1'
+          id: 0,
+          title: 'new test title 1',
         }
       )
     ).toEqual([
       {
-        id: 1,
+        id: 0,
         title: 'new test title 1',
-        completed: false
+        completed: false,
       },
       {
-        id: 2,
+        id: 1,
         title: 'test title 2',
-        completed: true
-      }
-    ])
+        completed: true,
+      },
+    ]);
   });
 
   it('should handle remove todo', () => {
@@ -86,28 +83,28 @@ describe('reducers', () => {
       todos(
         [
           {
-            id: 1,
+            id: 0,
             title: 'test title 1',
-            completed: false
+            completed: false,
           },
           {
-            id: 2,
+            id: 1,
             title: 'test title 2',
-            completed: true
-          }
+            completed: true,
+          },
         ],
         {
           type: 'REMOVE_TODO',
-          id: 2
+          id: 1,
         }
       )
     ).toEqual([
       {
-        id: 1,
+        id: 0,
         title: 'test title 1',
-        completed: false
-      }
-    ])
+        completed: false,
+      },
+    ]);
   });
 
   it('should handle complete todo', () => {
@@ -115,32 +112,32 @@ describe('reducers', () => {
       todos(
         [
           {
-            id: 1,
+            id: 0,
             title: 'test title 1',
             completed: false,
           },
           {
-            id: 2,
+            id: 1,
             title: 'test title 2',
             completed: false,
-          }
+          },
         ],
         {
           type: 'COMPLETE_TODO',
-          id: 2
+          id: 1,
         }
       )
     ).toEqual([
       {
-        id: 1,
+        id: 0,
         title: 'test title 1',
-        completed: false
+        completed: false,
       },
       {
-        id: 2,
+        id: 1,
         title: 'test title 2',
-        completed: true
-      }
-    ])
-  })
+        completed: true,
+      },
+    ]);
+  });
 });

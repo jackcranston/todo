@@ -1,27 +1,23 @@
-let id = 0;
-
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
-      id += 1;
-
       return [
         ...state,
         {
-          id,
+          id: state.length,
           title: action.title,
-          completed: false
+          completed: false,
         },
       ];
 
     case 'UPDATE_TODO':
       return state.map((todo) => {
         if (todo.id === action.id) {
-          return ({
+          return {
             id: todo.id,
             title: action.title,
-            completed: todo.completed
-          });
+            completed: todo.completed,
+          };
         }
         return todo;
       });
@@ -32,11 +28,11 @@ const todos = (state = [], action) => {
     case 'COMPLETE_TODO':
       return state.map((todo) => {
         if (todo.id === action.id) {
-          return ({
+          return {
             id: todo.id,
             title: todo.title,
-            completed: !todo.completed
-          });
+            completed: !todo.completed,
+          };
         }
         return todo;
       });
