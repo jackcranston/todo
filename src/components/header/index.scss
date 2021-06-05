@@ -1,7 +1,10 @@
+@import 'src/styles/global.scss';
+
 /* Header */
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: $space-xs;
 }

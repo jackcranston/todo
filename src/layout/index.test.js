@@ -8,6 +8,13 @@ import { Layout } from './index';
 beforeEach(() => {
   const mockStore = configureStore([]);
   const store = mockStore({
+    globals: {
+      sort: 'ASC',
+      filters: {
+        active: true,
+        complete: true,
+      },
+    },
     todos: [],
   });
 

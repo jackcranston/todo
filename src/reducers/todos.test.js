@@ -1,6 +1,6 @@
 import todos from './todos';
 
-describe('reducers', () => {
+describe('todo reducers', () => {
   it('should handle add todo', () => {
     expect(
       todos([], {

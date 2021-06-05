@@ -6,17 +6,17 @@ const addTodo = (title) => ({
 const updateTodo = (id, title) => ({
   type: 'UPDATE_TODO',
   id,
-  title
+  title,
 });
 
 const removeTodo = (id) => ({
   type: 'REMOVE_TODO',
-  id
+  id,
 });
 
 const completeTodo = (id) => ({
   type: 'COMPLETE_TODO',
-  id
-})
+  id,
+});
 
 export { addTodo, updateTodo, removeTodo, completeTodo };

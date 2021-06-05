@@ -2,7 +2,14 @@
 
 /* card grid */
 
-.card-grid {
-  display: flex;
-  flex-direction: column;
+.cardGrid:not(.filter--complete) {
+  .card--complete {
+    display: none;
+  }
+}
+
+.cardGrid:not(.filter--active) {
+  .card:not(.card--complete) {
+    display: none;
+  }
 }

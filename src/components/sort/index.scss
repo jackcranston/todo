@@ -3,14 +3,12 @@
 /* Sort */
 
 .sort {
-  margin-bottom: $space-sm;
-  background: $secondary;
-
   &__select {
     padding: $space-xs;
     border: 0;
     color: $white;
     background: 0;
     font-size: $font-default;
+    cursor: pointer;
   }
 }

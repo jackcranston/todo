@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Provider } from 'react-redux';
@@ -9,14 +9,18 @@ import Card from './index';
 
 const mockStore = configureStore([]);
 const store = mockStore({
+  globals: {
+    sort: 'ASC',
+    filters: {
+      active: true,
+      complete: true,
+    },
+  },
   todos: [
     {
       id: 1,
       title: 'test title 1',
       completed: false,
-      updateTodo: jest.fn(),
-      removeTodo: jest.fn(),
-      completeTodo: jest.fn(),
     },
   ],
 });
@@ -102,31 +106,24 @@ describe('card::functionality', () => {
     expect(input.value).toBe(inputText);
   });
 
-  /*
+  /* NEED A WAY OF TESTING THIS - NEEDS TO WAIT FOR UPDATE BEFORE EXPECTING
   it('marks todo as complete when user clicks complete button', async () => {
-    const mockCompleteTodo = jest.fn();
+    const card = screen.getByTestId('card');
     const completeButton = screen.getByTestId('card-complete');
-    render(<Card store={store} completeTodo={mockCompleteTodo} />);
 
     userEvent.click(completeButton);
-    expect(mockCompleteTodo).toHaveBeenCalledTimes(1);
-  });
-*/
-  /*
-  it('marks todo as complete when user clicks complete button', async () => {
-    const completeButton = screen.getByTestId('card-complete');
-    const expectedAction = ({ type: 'COMPLETE_TODO', id: 1 });
-
-    userEvent.click(completeButton);
-    expect(actions).toEqual(expectedAction);
-  });
-  */
-
+    const completeCard = await findBy
+    await waitFor(() => card.toHaveClass('card--complete'))
+  });*/
   /*
   it('removes todo when user clicks remove button', async () => {
+    const card = screen.getByTestId('card');
     const removeButton = screen.getByTestId('card-remove');
 
+    expect(card).toBeInTheDocument();
     userEvent.click(removeButton);
-    expect(removeTodo).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(card).not.toBeInTheDocument();
+    });
   });*/
 });

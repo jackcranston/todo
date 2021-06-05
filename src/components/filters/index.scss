@@ -4,11 +4,11 @@
 
 .filters {
   padding: $space-xs;
-  margin-bottom: $space-md;
-  background: $secondary;
   font-size: $font-default;
 
   &__label {
+    cursor: pointer;
+
     &:not(:last-child) {
       margin-right: $space-xs;
     }

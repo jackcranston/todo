@@ -7,14 +7,20 @@ import Form from './index';
 
 const mockStore = configureStore([]);
 const store = mockStore({
+  globals: {
+    sort: 'ASC',
+    filters: {
+      active: true,
+      complete: true,
+    },
+  },
   todos: [],
 });
-const mockAddTodo = jest.fn(test);
 
 beforeEach(() => {
   render(
     <Provider store={store}>
-      <Form addTodo={mockAddTodo} />
+      <Form />
     </Provider>
   );
 });
@@ -43,14 +49,14 @@ describe('form::functionality', () => {
     expect(formInput.value).toEqual(testValue);
   });
   /*
-  it('submits form correctly', () => {
-    const formInput = screen.getByTestId('form-input');
+  it('submits form correctly', async () => {
     const formSubmit = screen.getByTestId('form-submit');
+    const formInput = screen.getByTestId('form-input');
     const testValue = 'input test 1';
 
     fireEvent.change(formInput, { target: { value: testValue } });
     fireEvent.click(formSubmit);
     expect(formInput.value).toEqual('');
-    expect(mockAddTodo).toHaveBeenCalled();
+    await waitFor(() => screen.getByText(testValue));
   });*/
 });
