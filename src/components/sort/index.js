@@ -14,11 +14,12 @@ const Sort = ({ sortTodos }) => {
 
   return (
     <fieldset className="sort">
-      <label className="sort__label" htmlFor="sort">
-        <span className="sr-only">Sort</span>
+      <label htmlFor="sort">
+        <span className="sr-only">Sort by</span>
         <select
           className="sort__select"
           id="sort"
+          data-testid="sort"
           name="sort"
           defaultValue={selectValue}
           onChange={handleSelectChange}
@@ -26,8 +27,8 @@ const Sort = ({ sortTodos }) => {
           <option value="default" disabled>
             Sort
           </option>
-          <option value="ASC">Title ASC</option>
-          <option value="DSC">Title DSC</option>
+          <option value="ASC">ASC</option>
+          <option value="DSC">DSC</option>
         </select>
       </label>
     </fieldset>

@@ -1,36 +1,20 @@
 import React from 'react';
 import { render, screen, cleanup, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
+import mockStoreData from '../../helpers/mockStoreData';
 
 import Card from './index';
 
-const mockStore = configureStore([]);
-const store = mockStore({
-  globals: {
-    sort: 'ASC',
-    filters: {
-      active: true,
-      complete: true,
-    },
-  },
-  todos: [
-    {
-      id: 1,
-      title: 'test title 1',
-      completed: false,
-    },
-  ],
-});
-const todo = store.getState().todos[0];
-const actions = store.getActions();
-
 beforeEach(() => {
+  const mockStore = configureStore([]);
+  const store = mockStore(mockStoreData);
+  const todo = store.getState().todos[0];
+
   render(
     <Provider store={store}>
-      <Card {...todo} />
+      <Card {...todo} />;
     </Provider>
   );
 });
@@ -38,8 +22,8 @@ beforeEach(() => {
 afterEach(cleanup);
 
 describe('card::rendering', () => {
-  it('renders element correctly', () => {
-    const card = screen.getByTestId('card');
+  it('renders element correctly', async () => {
+    const card = await screen.getByTestId('card');
 
     expect(card).toBeTruthy();
   });
@@ -67,6 +51,12 @@ describe('card::rendering', () => {
     expect(removeButton).toBeInTheDocument();
     expect(completeButton).toBeInTheDocument();
   });
+
+  it('renders with complete class', async () => {
+    const card = screen.getByTestId('card');
+
+    expect(card).toHaveClass('card--complete');
+  });
 });
 
 describe('card::functionality', () => {
@@ -77,7 +67,7 @@ describe('card::functionality', () => {
 
     userEvent.click(editButton);
 
-    expect(card.classList.contains('card--editing')).toBe(true);
+    expect(card).toHaveClass('card--editing');
     expect(input.disabled).toBe(false);
   });
 
@@ -106,24 +96,17 @@ describe('card::functionality', () => {
     expect(input.value).toBe(inputText);
   });
 
-  /* NEED A WAY OF TESTING THIS - NEEDS TO WAIT FOR UPDATE BEFORE EXPECTING
-  it('marks todo as complete when user clicks complete button', async () => {
-    const card = screen.getByTestId('card');
-    const completeButton = screen.getByTestId('card-complete');
-
-    userEvent.click(completeButton);
-    const completeCard = await findBy
-    await waitFor(() => card.toHaveClass('card--complete'))
-  });*/
-  /*
   it('removes todo when user clicks remove button', async () => {
     const card = screen.getByTestId('card');
     const removeButton = screen.getByTestId('card-remove');
 
     expect(card).toBeInTheDocument();
     userEvent.click(removeButton);
-    await waitFor(() => {
-      expect(card).not.toBeInTheDocument();
-    });
-  });*/
+
+    // expect(card).not.toBeInTheDocument(); NEED TO VERIFY THAT IT'S NOT LONGER IN DOCUMENT
+  });
+
+  /**
+   * TODO: test that clicking buttons runs the related function
+   */
 });

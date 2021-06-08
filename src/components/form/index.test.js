@@ -2,20 +2,12 @@ import React from 'react';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
+import mockStoreData from '../../helpers/mockStoreData';
 
 import Form from './index';
 
 const mockStore = configureStore([]);
-const store = mockStore({
-  globals: {
-    sort: 'ASC',
-    filters: {
-      active: true,
-      complete: true,
-    },
-  },
-  todos: [],
-});
+const store = mockStore(mockStoreData);
 
 beforeEach(() => {
   render(
@@ -48,15 +40,15 @@ describe('form::functionality', () => {
 
     expect(formInput.value).toEqual(testValue);
   });
-  /*
-  it('submits form correctly', async () => {
+
+  it('resets input after submit', async () => {
     const formSubmit = screen.getByTestId('form-submit');
     const formInput = screen.getByTestId('form-input');
     const testValue = 'input test 1';
 
     fireEvent.change(formInput, { target: { value: testValue } });
     fireEvent.click(formSubmit);
+
     expect(formInput.value).toEqual('');
-    await waitFor(() => screen.getByText(testValue));
-  });*/
+  });
 });

@@ -10,17 +10,20 @@ const Filters = ({ filterTodos }) => {
     complete: true,
   });
 
+  /**
+   * issue here is partially down to not having single
+   * source of truth, we have two separate states, a localised one
+   * in the component as well as the store... this may be causing
+   * mismatching state.
+   */
+
   const handleCheckboxChange = (event) => {
     setValues({
       ...checkboxValues,
       [event.target.value]: event.target.checked,
     });
     filterTodos(checkboxValues);
-    console.log(checkboxValues);
   };
-  /**
-   * Issue here is that the DOM isn't updating after each change, it is delayed by one
-   */
 
   return (
     <fieldset className="filters" data-testid="filters">
@@ -33,7 +36,7 @@ const Filters = ({ filterTodos }) => {
           name="filters"
           value="active"
           defaultChecked={checkboxValues.active}
-          onChange={handleCheckboxChange}
+          onChange={(event) => handleCheckboxChange(event)}
           data-testid="filter-active"
         />
         Active
@@ -46,7 +49,7 @@ const Filters = ({ filterTodos }) => {
           name="filters"
           value="complete"
           defaultChecked={checkboxValues.complete}
-          onChange={handleCheckboxChange}
+          onChange={(event) => handleCheckboxChange(event)}
           data-testid="filter-complete"
         />
         Complete
