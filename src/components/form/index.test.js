@@ -1,20 +1,12 @@
 import React from 'react';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import mockStoreData from '../../helpers/mockStoreData';
 
-import Form from './index';
+import { Form } from './index';
 
-const mockStore = configureStore([]);
-const store = mockStore(mockStoreData);
+const mockAddTodo = jest.fn();
 
 beforeEach(() => {
-  render(
-    <Provider store={store}>
-      <Form />
-    </Provider>
-  );
+  render(<Form addTodo={mockAddTodo} />);
 });
 
 afterEach(cleanup);
@@ -37,18 +29,27 @@ describe('form::functionality', () => {
     const testValue = 'input test 1';
 
     fireEvent.change(formInput, { target: { value: testValue } });
-
     expect(formInput.value).toEqual(testValue);
   });
 
-  it('resets input after submit', async () => {
+  it('resets input on submit', async () => {
     const formSubmit = screen.getByTestId('form-submit');
     const formInput = screen.getByTestId('form-input');
     const testValue = 'input test 1';
 
     fireEvent.change(formInput, { target: { value: testValue } });
     fireEvent.click(formSubmit);
-
     expect(formInput.value).toEqual('');
+    expect(mockAddTodo).toHaveBeenCalled();
+  });
+
+  it('calls dispatch function on submit', () => {
+    const formSubmit = screen.getByTestId('form-submit');
+    const formInput = screen.getByTestId('form-input');
+    const testValue = 'input test 1';
+
+    fireEvent.change(formInput, { target: { value: testValue } });
+    fireEvent.click(formSubmit);
+    expect(mockAddTodo).toHaveBeenCalled();
   });
 });

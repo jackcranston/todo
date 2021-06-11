@@ -1,5 +1,5 @@
 const initialState = {
-  sort: 'DSC',
+  sort: 'default',
   filters: {
     active: true,
     complete: true,

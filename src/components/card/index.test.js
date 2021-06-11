@@ -1,22 +1,30 @@
 import React from 'react';
-import { render, screen, cleanup, waitFor } from '@testing-library/react';
+import {
+  render,
+  screen,
+  cleanup,
+  waitForElement,
+  waitForElementToBeRemoved,
+  waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import mockStoreData from '../../helpers/mockStoreData';
 
-import Card from './index';
+import { Card } from './index';
+
+const cardProps = {
+  id: 1,
+  title: 'test title 1',
+  completed: true,
+  updateTodo: jest.fn(),
+  removeTodo: jest.fn(),
+  completeTodo: jest.fn(),
+};
 
 beforeEach(() => {
-  const mockStore = configureStore([]);
-  const store = mockStore(mockStoreData);
-  const todo = store.getState().todos[0];
-
-  render(
-    <Provider store={store}>
-      <Card {...todo} />;
-    </Provider>
-  );
+  render(<Card {...cardProps} />);
 });
 
 afterEach(cleanup);
@@ -93,6 +101,7 @@ describe('card::functionality', () => {
     userEvent.type(input, inputText);
     userEvent.click(submitButton);
 
+    expect(cardProps.updateTodo).toHaveBeenCalled();
     expect(input.value).toBe(inputText);
   });
 
@@ -102,11 +111,18 @@ describe('card::functionality', () => {
 
     expect(card).toBeInTheDocument();
     userEvent.click(removeButton);
-
-    // expect(card).not.toBeInTheDocument(); NEED TO VERIFY THAT IT'S NOT LONGER IN DOCUMENT
+    expect(cardProps.removeTodo).toHaveBeenCalled();
+    waitForElementToBeRemoved(card).then(() =>
+      expect(card).not.toBeInTheDocument()
+    );
   });
 
-  /**
-   * TODO: test that clicking buttons runs the related function
-   */
+  it('marks todo as complete when user clicks complete button', async () => {
+    const card = screen.getByTestId('card');
+    const completeButton = screen.getByTestId('card-complete');
+
+    expect(card).toHaveClass('card--complete');
+    userEvent.click(completeButton);
+    expect(cardProps.completeTodo).toHaveBeenCalled();
+  });
 });

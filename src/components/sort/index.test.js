@@ -1,21 +1,15 @@
 import React from 'react';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import mockStoreData from '../../helpers/mockStoreData';
 
-import Sort from './index';
+import { Sort } from './index';
+
+const sortProps = {
+  sort: 'default',
+  sortTodos: jest.fn(),
+};
 
 beforeEach(() => {
-  const mockStore = configureStore([]);
-  const store = mockStore(mockStoreData);
-  const sortTodos = jest.fn();
-
-  render(
-    <Provider store={store}>
-      <Sort sortTodos={sortTodos}></Sort>
-    </Provider>
-  );
+  render(<Sort {...sortProps}></Sort>);
 });
 
 afterEach(cleanup);
@@ -37,10 +31,12 @@ describe('sort::rendering', () => {
 });
 
 describe('sort::functionality', () => {
-  it('sort function gets called', () => {
+  it('sets select input correctly and calls dispatch function', () => {
     const selectInput = screen.getByTestId('sort');
 
+    expect(selectInput.value).toEqual('default');
     fireEvent.change(selectInput, { target: { value: 'ASC' } });
     expect(selectInput.value).toEqual('ASC');
+    expect(sortProps.sortTodos).toHaveBeenCalled();
   });
 });

@@ -1,20 +1,18 @@
 import React from 'react';
-import { cleanup, render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import mockStoreData from '../../helpers/mockStoreData';
+import { cleanup, render, screen, fireEvent } from '@testing-library/react';
 
-import Filters from './index';
+import { Filters } from './index';
+
+const filtersProps = {
+  filters: {
+    active: true,
+    complete: true,
+  },
+  filterTodos: jest.fn(),
+};
 
 beforeEach(() => {
-  const mockStore = configureStore([]);
-  const store = mockStore(mockStoreData);
-
-  render(
-    <Provider store={store}>
-      <Filters />
-    </Provider>
-  );
+  render(<Filters {...filtersProps} />);
 });
 
 afterEach(cleanup);
@@ -35,11 +33,22 @@ describe('filters::rendering', () => {
   });
 });
 
-/**
- * TODOS: test inputs, make sure they work straight away
- *
- * we might have an issue where we are testing that the input is working
- * and the component is rendering properly based on state, but we don't know
- * if these things are working together 100%. We need to test if change the input
- * that the right outcome happens after this. But this seems hard to do with async
- */
+describe('filters::functionality', () => {
+  it('checks active filter checkbox and dispatches function', () => {
+    const filterActive = screen.getByTestId('filter-active');
+
+    expect(filterActive.checked).toEqual(true);
+    fireEvent.click(filterActive);
+    expect(filterActive.checked).toEqual(false);
+    expect(filtersProps.filterTodos).toBeCalled();
+  });
+
+  it('checks complete filter checkbox and calls dispatch function', () => {
+    const filterComplete = screen.getByTestId('filter-complete');
+
+    expect(filterComplete.checked).toEqual(true);
+    fireEvent.click(filterComplete);
+    expect(filterComplete.checked).toEqual(false);
+    expect(filtersProps.filterTodos).toBeCalled();
+  });
+});

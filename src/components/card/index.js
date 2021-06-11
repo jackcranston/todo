@@ -2,15 +2,27 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faTimes, faPen, faSave } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCheck,
+  faTimes,
+  faPen,
+  faSave,
+} from '@fortawesome/free-solid-svg-icons';
 
 import './index.scss';
 
-const Card = ({ id, title, completed, updateTodo, removeTodo, completeTodo }) => {
+export const Card = ({
+  id,
+  title,
+  completed,
+  updateTodo,
+  removeTodo,
+  completeTodo,
+}) => {
   const [state, setState] = useState({
     inputValue: title,
-    editing: false
+    editing: false,
   });
   const inputRef = useRef(null);
 
@@ -19,7 +31,7 @@ const Card = ({ id, title, completed, updateTodo, removeTodo, completeTodo }) =>
   const handleInputChange = (event) => {
     setState({
       ...state,
-      inputValue: event.target.value
+      inputValue: event.target.value,
     });
   };
 
@@ -28,27 +40,35 @@ const Card = ({ id, title, completed, updateTodo, removeTodo, completeTodo }) =>
     updateTodo(id, state.inputValue);
     setState({
       ...state,
-      editing: !state.editing
-    })
+      editing: !state.editing,
+    });
   };
 
   const toggleEditable = () => {
     setState({
       ...state,
-      editing: !state.editing
-    })
-  }
+      editing: !state.editing,
+    });
+  };
 
   const classes = [
     'card',
     !state.editing ? '' : 'card--editing',
-    !completed ? '' : 'card--complete'
-  ]
+    !completed ? '' : 'card--complete',
+  ];
 
   return (
     <div className={classes.join(' ')} id={`card-${id}`} data-testid="card">
-      <form className="card__form" data-testid="card-form" onSubmit={handleSubmit}>
-        <label className="card__label" htmlFor={`card-input-${id}`} data-testid="card-label">
+      <form
+        className="card__form"
+        data-testid="card-form"
+        onSubmit={handleSubmit}
+      >
+        <label
+          className="card__label"
+          htmlFor={`card-input-${id}`}
+          data-testid="card-label"
+        >
           <span className="card__title">Edit todo</span>
           <input
             className="card__input"
@@ -61,20 +81,39 @@ const Card = ({ id, title, completed, updateTodo, removeTodo, completeTodo }) =>
             disabled={!state.editing}
           />
         </label>
-        <button className="card__button card__button--submit" data-testid="card-submit" type="submit">
+        <button
+          className="card__button card__button--submit"
+          data-testid="card-submit"
+          type="submit"
+        >
           <span className="sr-only">Save</span>
           <FontAwesomeIcon icon={faSave} />
         </button>
       </form>
-      <button className="card__button card__button--edit" type="button" data-testid="card-edit" onClick={toggleEditable}>
+      <button
+        className="card__button card__button--edit"
+        type="button"
+        data-testid="card-edit"
+        onClick={toggleEditable}
+      >
         <span className="sr-only">Edit</span>
         <FontAwesomeIcon icon={faPen} />
       </button>
-      <button className="card__button card__button--remove" type="button" onClick={() => removeTodo(id)} data-testid="card-remove">
+      <button
+        className="card__button card__button--remove"
+        type="button"
+        onClick={() => removeTodo(id)}
+        data-testid="card-remove"
+      >
         <span className="sr-only">Remove</span>
         <FontAwesomeIcon icon={faTimes} />
       </button>
-      <button className="card__button card__button--complete" type="button" onClick={() => completeTodo(id)} data-testid="card-complete">
+      <button
+        className="card__button card__button--complete"
+        type="button"
+        onClick={() => completeTodo(id)}
+        data-testid="card-complete"
+      >
         <span className="sr-only">Complete</span>
         <FontAwesomeIcon icon={faCheck} />
       </button>
@@ -88,7 +127,7 @@ Card.defaultProps = {
   completed: false,
   updateTodo: () => {},
   removeTodo: () => {},
-  completeTodo: () => {}
+  completeTodo: () => {},
 };
 
 Card.propTypes = {
@@ -97,15 +136,16 @@ Card.propTypes = {
   completed: PropTypes.bool,
   updateTodo: PropTypes.func,
   removeTodo: PropTypes.func,
-  completeTodo: PropTypes.func
+  completeTodo: PropTypes.func,
 };
 
-const mapStateToProps = (state, { id }) => state.todos.find((todo) => todo.id === id);
+const mapStateToProps = (state, { id }) =>
+  state.todos.find((todo) => todo.id === id);
 
 const mapDispatchToProps = (dispatch) => ({
   updateTodo: (id, title) => dispatch({ type: 'UPDATE_TODO', id, title }),
   removeTodo: (id) => dispatch({ type: 'REMOVE_TODO', id }),
-  completeTodo: (id) => dispatch({ type: 'COMPLETE_TODO', id})
+  completeTodo: (id) => dispatch({ type: 'COMPLETE_TODO', id }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);

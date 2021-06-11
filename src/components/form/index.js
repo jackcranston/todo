@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import './index.scss';
 
-const Form = ({ id, addTodo }) => {
+export const Form = ({ addTodo }) => {
   const [inputValue, setValue] = useState('');
 
   const handleInputChange = (event) => {
@@ -19,11 +19,11 @@ const Form = ({ id, addTodo }) => {
 
   return (
     <form className="form" data-testid="form" onSubmit={handleSubmit}>
-      <label htmlFor={`${id}-input`}>
+      <label htmlFor="todo-form-input">
         <span className="sr-only">Add new task</span>
         <input
           className="form__input"
-          id={`${id}-input`}
+          id="todo-form-input"
           type="text"
           value={inputValue}
           placeholder="Add new task"
@@ -33,7 +33,7 @@ const Form = ({ id, addTodo }) => {
       </label>
       <button
         className="form__submit"
-        id={`${id}-submit`}
+        id="todo-form-submit"
         type="submit"
         data-testid="form-submit"
         hidden
@@ -45,12 +45,10 @@ const Form = ({ id, addTodo }) => {
 };
 
 Form.defaultProps = {
-  id: 'form',
   addTodo: () => {},
 };
 
 Form.propTypes = {
-  id: PropTypes.string,
   addTodo: PropTypes.func,
 };
 
